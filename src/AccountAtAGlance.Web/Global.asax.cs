@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AccountAtAGlance.Model;
+using Unity.Mvc3;
 
 namespace AccountAtAGlance
 {
@@ -44,6 +46,11 @@ namespace AccountAtAGlance
             RegisterRoutes(RouteTable.Routes);
 
             BundleTable.Bundles.RegisterTemplateBundles();
+
+            var container = ModelContainer.Instance;
+            container.RegisterControllers();
+
+            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
 }
